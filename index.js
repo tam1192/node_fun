@@ -1,94 +1,39 @@
 // fetchAPIを使う
 // voicevox = http://localhost:50021/
 
-const ServerHTTPS=false;
-const ServerAddress='localhost';
-const ServerPort=50021;
-// const url="https://www.google.com/"
+const fs = require("node:fs");
+const vox = require("./module/vox");
+const config = require("./config.json");
 
-// fetch(url)
-//     .then((res) => res.text() )
-//     .then((data) => console.log(data));
+const voicevox = new vox(config.ServerAddress,config.ServerPort,config.ServerHTTPS);
 
-//さらに細かく
-// async function postdata(url='',data={})
-// {
-//     const res = await fetch(url, {
-//         method: 'POST',
-//         cache: 'no-cache',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     })    
-//     return res.json();
-// }
+voicevox.on("build_query",(query,text)=>{
+    console.group("query完成");
+    console.info(text);
+    console.debug(query);
+    console.groupEnd();
+});
 
-// postdata(url)
-//     .then((data) => {
-//         console.log(data);
-//     });
+voicevox.on("build_wav",(data,text)=>{
+    fs.writeFileSync("./"+text+".wav",data);
+    console.group("音声完成");
+    console.info(text)
+    console.groupEnd();
+});
 
-class vox{
-    constructor(address=ServerAddress,port=ServerPort,https=ServerHTTPS)
-    {
-        proto = https ? 'https://' : 'http://';
-        this.#url = proto + address + toString(port);
-    }
-    get_speakers = ()=>
-    {
+voicevox.on("err",(x,y)=>{
+    console.error("発生個所:",x);
+    console.debug("ステータスコード:",y);
+})
 
-    }
-    audio_query = ()=>
-    {
-
-    }
+async function say(str=""){
+    // const que = await (await voicevox.audio_query(str,1)).synthesis(1,true);
+    await voicevox.synthesis(str,1);
 }
-/**
- * クエリクラスを作成
- * @constructor クエリとurlを引き受けます。
- * @this {query}
- */
-class query{
-    /**
-     * クエリを引き受ける
-     * @param {string} url サーバーのアドレス
-     * @param {object} query クエリ
-     */
-    constructor(url,query={}){
-        self.query=query;
-        self.url=url;
-    };
-    /** 
-     * 音声合成する。 
-     * @param {number} speaker 喋る人のID
-     * @param {boolean} enable_interrogative_upspeak 疑問系のテキストが与えられたら語尾を自動調整する
-     * @returns fetchオブジェクト(中身はwav)
-     */
-    synthesis = async function(speaker=0,enable_interrogative_upspeak=true){
-        const url = self.url + '/synthesis?' + new URLSearchParams({
-            speaker: speaker,
-            enable_interrogative_upspeak: enable_interrogative_upspeak
-        });
-        const reqinit = {
-            method: 'POST',
-            cache: 'no-cache',
-            headers: {
-                'accept':'application/wav',
-                'Content-Type':'application/json'
-            },
-            body: self.query.json()
-        };
-        console.debug("音声生成中");
-        return await fetch(url,reqinit);
-    };
-    //以下クエリ関係の処理を書く
-};
-class speaker{
-    constructor(url,query={}){
-       self.query=query;// 
-       self.url=url;
-    }
-    id_name = (id=0) => {
 
-    }
-}
+console.clear();
+say("こんにちは、僕ずんだもん！");
+// say("東北ばんざい！");
+// say("ずんこのふとももはもっちもち");
+// say("私はスパムが大っ嫌いなのよ");
+// say("あかねちゃんかわいいやったー");

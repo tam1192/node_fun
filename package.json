@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tam1192/node_fun/issues"
   },
-  "homepage": "https://github.com/tam1192/node_fun#readme"
+  "homepage": "https://github.com/tam1192/node_fun#readme",
+  "dependencies": {
+    "@discordjs/core": "^0.6.0"
+  }
 }
