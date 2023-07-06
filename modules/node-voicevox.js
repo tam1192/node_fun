@@ -3,9 +3,9 @@
 /**
  * @class クエリ情報をまとめるクラス
  */
-exports.query = require('./voicevox/query');
+exports.query = require('./node-voicevox/query');
 
 /**
  * @class voicevoxエンジン情報をまとめるクラス
  */
-exports.voicevox_engine = require('./voicevox/voicevox_engine');
+exports.voicevox_engine = require('./node-voicevox/voicevox_engine');

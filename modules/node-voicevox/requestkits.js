@@ -139,8 +139,10 @@ module.exports= class {
 				return await responseFetch.arrayBuffer();
 			case 422:
 				throw await responseFetch.json();
-			default:
+			case 404:
 				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
+			default:
+				throw new Error('想定しないエラーが発生しました。')
 		}
 	}
 
@@ -150,25 +152,29 @@ module.exports= class {
 	
 	static getSpeaker = async(engine) => {
 		const responseFetch = await this.serverGetter(engine,'speakers');
-		if(responseFetch.ok){
-			return responseFetch.json();
-		} else {
-			switch (responseFetch.status) {
-				default:
-					throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
-			}
+		switch (responseFetch.status) {
+			case 200:
+				return responseFetch.json();
+			case 422:
+				throw await responseFetch.json();
+			case 404:
+				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
+			default:
+				throw new Error('想定しないエラーが発生しました。')
 		}
 	}
 
 	static getUserdict = async(engine) => {
 		const responseFetch = await this.serverGetter(engine,'user_dict');
-		if(responseFetch.ok){
-			return responseFetch.json();
-		} else {
-			switch (responseFetch.status) {
-				default:
-					throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
-			}
+		switch (responseFetch.status) {
+			case 200:
+				return responseFetch.json();
+			case 422:
+				throw await responseFetch.json();
+			case 404:
+				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
+			default:
+				throw new Error('想定しないエラーが発生しました。')
 		}
 	}
 
@@ -192,13 +198,15 @@ module.exports= class {
 				'accept': 'application/json'
 			},
 		}));
-		if(responseFetch.ok){
-			return responseFetch.json();
-		} else {
-			switch (responseFetch.status) {
-				default:
-					throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
-			}
+		switch (responseFetch.status) {
+			case 200:
+				return responseFetch.json();
+			case 422:
+				throw await responseFetch.json();
+			case 404:
+				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
+			default:
+				throw new Error('想定しないエラーが発生しました。')
 		}
 	}
 
@@ -209,17 +217,15 @@ module.exports= class {
 				'accept': '*/*'
 			},
 		});
-		if(responseFetch.ok){
-			return responseFetch.status;
-		} else {
-			switch (responseFetch.status) {
-				case 422:
-					const msg = await responseFetch.json();
-					console.log(msg.detail);
-					return responseFetch.json;
-				default:
-					throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
-			}
+		switch (responseFetch.status) {
+			case 200:
+				return responseFetch.json();
+			case 422:
+				throw await responseFetch.json();
+			case 404:
+				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
+			default:
+				throw new Error('想定しないエラーが発生しました。')
 		}
 	}
 }

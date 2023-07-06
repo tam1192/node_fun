@@ -84,9 +84,6 @@ module.exports = class {
 			} catch (error) {
 				console.error('voiceの作成に失敗しました。')
 				throw error;
-				// for(e of error){
-				// 	console.log(e);
-				// }
 			}
 			console.info('voiceを作成しました。')
 			// voice作成したよ
