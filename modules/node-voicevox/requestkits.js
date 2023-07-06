@@ -117,6 +117,8 @@ module.exports= class {
 			case 200:
 				return responseFetch.json();
 			case 422:
+				console.error("voicevoxエンジンでエラーが発生しています。");
+				console.error("メソッド名:createAudioquery");
 				throw await responseFetch.json();
 			case 404:
 				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
@@ -138,6 +140,8 @@ module.exports= class {
 			case 200:
 				return await responseFetch.arrayBuffer();
 			case 422:
+				console.error("voicevoxエンジンでエラーが発生しています。");
+				console.error("メソッド名:synthesisQuery");
 				throw await responseFetch.json();
 			case 404:
 				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
@@ -156,6 +160,8 @@ module.exports= class {
 			case 200:
 				return responseFetch.json();
 			case 422:
+				console.error("voicevoxエンジンでエラーが発生しています。");
+				console.error("メソッド名:getSpeaker");
 				throw await responseFetch.json();
 			case 404:
 				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
@@ -170,6 +176,8 @@ module.exports= class {
 			case 200:
 				return responseFetch.json();
 			case 422:
+				console.error("voicevoxエンジンでエラーが発生しています。");
+				console.error("メソッド名:getUserdict");
 				throw await responseFetch.json();
 			case 404:
 				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
@@ -202,6 +210,8 @@ module.exports= class {
 			case 200:
 				return responseFetch.json();
 			case 422:
+				console.error("voicevoxエンジンでエラーが発生しています。");
+				console.error("メソッド名:setUserdict");
 				throw await responseFetch.json();
 			case 404:
 				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
@@ -221,6 +231,8 @@ module.exports= class {
 			case 200:
 				return responseFetch.json();
 			case 422:
+				console.error("voicevoxエンジンでエラーが発生しています。");
+				console.error("メソッド名:deleteUserdict");
 				throw await responseFetch.json();
 			case 404:
 				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
