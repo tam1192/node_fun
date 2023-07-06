@@ -113,13 +113,15 @@ module.exports= class {
 				'accept': 'application/json'
 			}
 		})
-		if(responseFetch.ok){
-			return responseFetch.json();
-		} else {
-			switch (responseFetch.status) {
-				default:
-					throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
-			}
+		switch (responseFetch.status) {
+			case 200:
+				return responseFetch.json();
+			case 422:
+				throw await responseFetch.json();
+			case 404:
+				throw new Error('voicevoxエンジンに接続できません。 エンジンを確認してください。');
+			default:
+				throw new Error('想定しないエラーが発生しました。')
 		}
 	}
 

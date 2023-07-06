@@ -1,0 +1,7 @@
+{
+    "voicevox": {
+        "https": false,
+        "address": "<your voicevox-engine address>",
+        "port": "50021"
+    }
+}
