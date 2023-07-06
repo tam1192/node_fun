@@ -1,6 +1,0 @@
-{
-    "ServerHTTPS":false,
-    "ServerAddress":"localhost",
-    "ServerPort":50021,
-    "exportdir":"./exports/"
-}
