@@ -1,0 +1,3 @@
+[submodule "modules/rakutenma"]
+	path = modules/rakutenma
+	url = https://github.com/rakuten-nlp/rakutenma.git
